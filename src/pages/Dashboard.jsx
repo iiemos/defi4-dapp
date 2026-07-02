@@ -6,8 +6,9 @@ import { ActionButton, Card, PageHeader, SectionTitle, StatCard } from "../compo
 
 function MarketChart() {
   return (
-    <div className="relative h-52 overflow-hidden rounded-lg border border-app-line bg-black">
-      <div className="absolute inset-0 grid-floor opacity-30" />
+    <div className="market-panel relative h-60 overflow-hidden rounded-lg border border-app-gold/15 bg-black">
+      <div className="absolute inset-0 grid-floor opacity-45" />
+      <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(212,175,55,0.12),transparent_36%),linear-gradient(270deg,rgba(39,174,96,0.08),transparent_34%)]" />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 600 220" role="img" aria-label="HPS price trend">
         <path d="M0 178 C70 142 82 162 130 118 S240 88 300 105 S392 143 450 76 S536 42 600 58" fill="none" stroke="#D4AF37" strokeWidth="4" strokeLinecap="round" />
         <path d="M0 178 C70 142 82 162 130 118 S240 88 300 105 S392 143 450 76 S536 42 600 58 L600 220 L0 220 Z" fill="url(#goldFill)" opacity="0.38" />
@@ -20,7 +21,7 @@ function MarketChart() {
       </svg>
       <div className="absolute left-4 top-4">
         <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">HPS Market</p>
-        <p className="mt-2 text-3xl font-black">$0.0846</p>
+        <p className="mt-2 text-4xl font-black">$0.0846</p>
       </div>
       <div className="absolute bottom-4 right-4 rounded-md border border-app-gold/25 bg-app-gold/10 px-3 py-2 text-xs font-bold text-app-gold">
         +3.82% / 24H

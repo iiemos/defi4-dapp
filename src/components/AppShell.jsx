@@ -144,9 +144,13 @@ export default function AppShell({ children }) {
 
   return (
     <div className="min-h-screen bg-app-black text-white">
-      <div className="pointer-events-none fixed inset-0 grid-floor opacity-20" />
+      <div className="app-backdrop" aria-hidden="true">
+        <div className="app-backdrop__mesh" />
+        <div className="app-backdrop__circuit" />
+        <div className="app-backdrop__scanline" />
+      </div>
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-app-line bg-black/80 backdrop-blur-xl">
+      <header className="app-header fixed inset-x-0 top-0 z-40 border-b border-app-line backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-6">
           <div className="flex items-center gap-3">
             <button
@@ -188,13 +192,13 @@ export default function AppShell({ children }) {
         </div>
       </header>
 
-      <aside className="fixed bottom-0 left-0 top-16 z-30 hidden w-64 border-r border-app-line bg-black/70 px-3 py-4 backdrop-blur-xl md:block">
+      <aside className="app-sidebar fixed bottom-0 left-0 top-16 z-30 hidden w-64 border-r border-app-line px-3 py-4 backdrop-blur-xl md:block">
         <nav className="grid gap-2">
           {navigation.map((item) => (
             <NavItem key={item.path} item={item} />
           ))}
         </nav>
-        <div className="absolute bottom-4 left-3 right-3 rounded-lg border border-app-line bg-app-panel p-3">
+        <div className="status-rail absolute bottom-4 left-3 right-3 rounded-lg border border-app-gold/15 p-3">
           <p className="text-xs font-bold text-app-gold">链上安全</p>
           <p className="mt-2 text-xs leading-5 text-app-text">
             钱包签名、资金操作、关系绑定均由用户授权执行，前端不保存私钥。
@@ -225,7 +229,7 @@ export default function AppShell({ children }) {
         </div>
       ) : null}
 
-      <main className="relative mx-auto min-h-screen w-full max-w-7xl px-4 pb-12 pt-20 md:pl-72 md:pr-6">
+      <main className="content-stage relative mx-auto min-h-screen w-full max-w-7xl px-4 pb-12 pt-20 md:pl-72 md:pr-6">
         {children}
       </main>
     </div>

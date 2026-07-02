@@ -2,13 +2,13 @@ import { ChevronRight } from "lucide-react";
 
 export function PageHeader({ kicker, title, copy, action }) {
   return (
-    <section className="mb-6 flex flex-col gap-4 border-b border-app-line pb-6 lg:flex-row lg:items-end lg:justify-between">
-      <div className="max-w-3xl">
-        {kicker ? <p className="mb-2 text-xs font-black uppercase tracking-[0.22em] text-app-gold">{kicker}</p> : null}
+    <section className="page-hero mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+      <div className="page-hero__content max-w-3xl">
+        {kicker ? <p className="hero-kicker mb-2 text-xs font-black uppercase tracking-[0.22em] text-app-gold">{kicker}</p> : null}
         <h1 className="text-2xl font-black tracking-normal text-white md:text-4xl">{title}</h1>
         {copy ? <p className="mt-3 max-w-2xl text-sm leading-6 text-app-text md:text-base">{copy}</p> : null}
       </div>
-      {action ? <div className="shrink-0">{action}</div> : null}
+      {action ? <div className="page-hero__action shrink-0">{action}</div> : null}
     </section>
   );
 }
