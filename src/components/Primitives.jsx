@@ -2,10 +2,10 @@ import { ChevronRight } from "lucide-react";
 
 export function PageHeader({ kicker, title, copy, action }) {
   return (
-    <section className="page-hero mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <section className="page-hero mb-6 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
       <div className="page-hero__content max-w-3xl">
-        {kicker ? <p className="hero-kicker mb-2 text-xs font-black uppercase tracking-[0.22em] text-app-gold">{kicker}</p> : null}
-        <h1 className="text-2xl font-black tracking-normal text-white md:text-4xl">{title}</h1>
+        {kicker ? <p className="hero-kicker mb-3 text-xs font-black uppercase tracking-[0.22em] text-app-gold">{kicker}</p> : null}
+        <h1 className="text-3xl font-black leading-tight tracking-normal text-white md:text-5xl">{title}</h1>
         {copy ? <p className="mt-3 max-w-2xl text-sm leading-6 text-app-text md:text-base">{copy}</p> : null}
       </div>
       {action ? <div className="page-hero__action shrink-0">{action}</div> : null}
@@ -34,13 +34,13 @@ export function StatCard({ label, value, detail, tone = "gold" }) {
 export function ActionButton({ children, variant = "primary", className = "", ...props }) {
   const classes =
     variant === "primary"
-      ? "bg-gradient-to-r from-app-gold-dark to-app-gold text-black hover:brightness-110"
-      : "border border-app-gold/35 text-app-gold hover:bg-app-gold/10";
+      ? "home-gold-button"
+      : "h-11 border border-app-gold/35 bg-[#1a1408]/55 px-4 text-app-gold hover:border-app-gold/70 hover:bg-[#231a0a]/70";
 
   return (
     <button
       type="button"
-      className={`inline-flex h-11 items-center justify-center gap-2 rounded-lg px-4 text-sm font-black transition active:translate-y-px disabled:border-app-line disabled:bg-app-panel disabled:text-app-muted ${classes} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-lg text-sm font-black transition active:translate-y-px ${classes} ${className}`}
       {...props}
     >
       {children}

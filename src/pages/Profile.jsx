@@ -11,7 +11,7 @@ export default function Profile() {
         kicker="My Account"
         title="个人中心"
         copy="展示钱包、上级关系、节点身份、等级进度、资产记录和链上操作状态。"
-        action={<ActionButton variant="secondary" onClick={() => openDialog("wallet")}><Wallet size={17} />切换钱包</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("wallet")}><Wallet size={18} />切换钱包</ActionButton>}
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -22,13 +22,15 @@ export default function Profile() {
       </section>
 
       <section className="mt-6 grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">Identity</p>
               <h2 className="mt-3 text-2xl font-black">H4 白名单账户</h2>
             </div>
-            <BadgeCheck size={38} className="text-app-gold" />
+            <span className="gold-icon-box h-14 w-14">
+              <BadgeCheck size={30} />
+            </span>
           </div>
           <p className="mt-3 text-sm leading-6 text-app-text">
             等级身份、节点认证状态和绑定关系全部来自链上数据，前台仅做可视化展示。
@@ -38,10 +40,12 @@ export default function Profile() {
           </div>
         </Card>
 
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-black">推广关系</h2>
-            <ShieldCheck size={22} className="text-app-gold" />
+            <span className="gold-icon-box h-10 w-10">
+              <ShieldCheck size={21} />
+            </span>
           </div>
           <div className="mt-4 grid gap-3">
             <div className="flex items-center justify-between rounded-lg border border-app-line bg-black p-3">

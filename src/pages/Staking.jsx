@@ -12,11 +12,11 @@ export default function Staking() {
         kicker="Stake / Redeem / Turbo"
         title="质押、赎回与涡轮收益"
         copy="所有质押数据、收益数据、倒计时与赎回权限由链上状态决定，周期内禁止强制终止。"
-        action={<ActionButton onClick={() => openDialog("stake")}>发起质押</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("stake")}><Wallet size={18} />发起质押</ActionButton>}
       />
 
       <section className="grid gap-4 xl:grid-cols-[1fr_0.9fr]">
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">Current Stake</p>
@@ -31,14 +31,14 @@ export default function Staking() {
           <div className="mt-6">
             <ProgressBar value={41} />
             <div className="mt-3 grid gap-3 text-sm md:grid-cols-3">
-              <span className="rounded-lg border border-app-line bg-black p-3 text-app-text">实时收益：<b className="text-app-gold">286.42 OPT</b></span>
-              <span className="rounded-lg border border-app-line bg-black p-3 text-app-text">昨日收益：<b className="text-white">12.8 OPT</b></span>
-              <span className="rounded-lg border border-app-line bg-black p-3 text-app-text">赎回状态：<b className="text-app-warning">未解锁</b></span>
+              <span className="metric-tile text-app-text">实时收益：<b className="text-app-gold">286.42 OPT</b></span>
+              <span className="metric-tile text-app-text">昨日收益：<b className="text-white">12.8 OPT</b></span>
+              <span className="metric-tile text-app-text">赎回状态：<b className="text-app-warning">未解锁</b></span>
             </div>
           </div>
         </Card>
 
-        <Card>
+        <Card className="module-feature-card">
           <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">Turbo Window</p>
           <h2 className="mt-3 text-2xl font-black">涡轮复投倒计时</h2>
           <p className="mt-2 text-sm leading-6 text-app-text">赎回后开始 6 小时倒计时，复投金额不低于本金且周期不短于上一轮才可提息。</p>
@@ -86,7 +86,9 @@ export default function Staking() {
               { icon: CheckCircle2, text: "交易上链成功后清空当期质押数据并更新余额。" },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3 rounded-lg border border-app-line bg-black p-3 text-sm text-app-text">
-                <item.icon size={18} className="shrink-0 text-app-gold" />
+                <span className="gold-icon-box h-9 w-9 shrink-0">
+                  <item.icon size={18} />
+                </span>
                 {item.text}
               </div>
             ))}

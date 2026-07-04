@@ -12,7 +12,7 @@ export default function Growth() {
         kicker="Referral / Level"
         title="推广业绩与等级体系"
         copy="上下级关系首次绑定后永久链上存证，直推、网下业绩与等级升级由合约统计同步。"
-        action={<ActionButton onClick={() => openDialog("invite")}>复制推广链接</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("invite")}><Copy size={18} />复制推广链接</ActionButton>}
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -22,13 +22,15 @@ export default function Growth() {
       </section>
 
       <section className="mt-6 grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">Invite Center</p>
               <h2 className="mt-3 text-2xl font-black">专属推广入口</h2>
             </div>
-            <QrCode className="text-app-gold" size={34} />
+            <span className="gold-icon-box">
+              <QrCode size={24} />
+            </span>
           </div>
           <div className="mt-5 grid gap-3">
             <div className="rounded-lg border border-app-line bg-black p-3">
@@ -42,12 +44,12 @@ export default function Growth() {
           </div>
         </Card>
 
-        <Card>
+        <Card className="module-feature-card">
           <SectionTitle title="升级进度" copy="当前 H4，累计业绩距离 H5 还差 82,400 U。" />
           <ProgressBar value={67} />
           <div className="mt-5 grid gap-3 md:grid-cols-3">
             {["当前等级 H4", "小区业绩 186,400U", "持仓 5,260U"].map((item) => (
-              <div key={item} className="rounded-lg border border-app-line bg-black p-3 text-sm font-bold text-app-text">
+              <div key={item} className="metric-tile text-sm font-bold text-app-text">
                 {item}
               </div>
             ))}

@@ -1,4 +1,4 @@
-import { Clock3, RotateCcw, Settings2, ShieldCheck } from "lucide-react";
+import { Clock3, RotateCcw, Settings2, ShieldCheck, Sparkles } from "lucide-react";
 import { useBusinessDialog } from "../components/businessDialogContext";
 import { ActionButton, Card, PageHeader, ProgressBar, StatCard } from "../components/Primitives";
 import { queueSnapshot } from "../data/defi4Data";
@@ -12,7 +12,7 @@ export default function Queue() {
         kicker="Global Queue"
         title="排队入池"
         copy="新用户完成授权与资产锁定后进入全局队列；已经质押过的账户涡轮复投时不再排队。"
-        action={<ActionButton onClick={() => openDialog("queue")}>立即排队</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("queue")}><Sparkles size={18} />立即排队</ActionButton>}
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -23,7 +23,7 @@ export default function Queue() {
       </section>
 
       <section className="mt-6 grid gap-4 xl:grid-cols-[0.85fr_1.15fr]">
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">My Queue</p>
@@ -48,7 +48,9 @@ export default function Queue() {
             { icon: RotateCcw, title: "利息控制", copy: "1‰ 排队利息由合约出账，到指定时间段可取消结算。" },
           ].map((item) => (
             <Card key={item.title}>
-              <item.icon size={22} className="text-app-gold" />
+              <span className="gold-icon-box">
+                <item.icon size={22} />
+              </span>
               <h3 className="mt-4 font-black">{item.title}</h3>
               <p className="mt-2 text-sm leading-6 text-app-text">{item.copy}</p>
             </Card>
@@ -58,17 +60,17 @@ export default function Queue() {
 
       <Card className="mt-6">
         <div className="grid gap-4 md:grid-cols-4">
-          <div>
-            <p className="text-xs text-app-muted">每日单量</p>
-            <p className="mt-2 text-xl font-black">{queueSnapshot.dailyOrders}</p>
+          <div className="metric-tile">
+            <p className="metric-tile__label">每日单量</p>
+            <p className="metric-tile__value">{queueSnapshot.dailyOrders}</p>
           </div>
-          <div>
-            <p className="text-xs text-app-muted">底池比例</p>
-            <p className="mt-2 text-xl font-black text-app-gold">{queueSnapshot.poolRatio}</p>
+          <div className="metric-tile">
+            <p className="metric-tile__label">底池比例</p>
+            <p className="metric-tile__value text-app-gold">{queueSnapshot.poolRatio}</p>
           </div>
-          <div>
-            <p className="text-xs text-app-muted">排队比例</p>
-            <p className="mt-2 text-xl font-black text-app-gold">{queueSnapshot.queueRatio}</p>
+          <div className="metric-tile">
+            <p className="metric-tile__label">排队比例</p>
+            <p className="metric-tile__value text-app-gold">{queueSnapshot.queueRatio}</p>
           </div>
           <div className="flex items-center gap-3 rounded-lg border border-app-line bg-black p-3">
             <Clock3 size={20} className="text-app-gold" />

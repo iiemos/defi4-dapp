@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   BadgeCheck,
   Bell,
@@ -141,6 +141,8 @@ function LanguageBubble() {
 export default function AppShell({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const { openDialog } = useBusinessDialog();
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   return (
     <div className="min-h-screen bg-app-black text-white">
@@ -150,8 +152,8 @@ export default function AppShell({ children }) {
         <div className="app-backdrop__scanline" />
       </div>
 
-      <header className="app-header fixed inset-x-0 top-0 z-40 border-b border-app-line backdrop-blur-xl">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 md:px-6">
+      <header className={`app-header fixed inset-x-0 top-0 z-40 border-b border-app-line backdrop-blur-xl ${isHome ? "home-header" : ""}`}>
+        <div className={`mx-auto flex h-16 w-full items-center justify-between px-4 md:px-6 ${isHome ? "max-w-none lg:px-10" : "max-w-7xl"}`}>
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -172,10 +174,26 @@ export default function AppShell({ children }) {
             </NavLink>
           </div>
 
-          <div className="hidden items-center gap-2 rounded-lg border border-app-line bg-app-panel px-3 py-2 text-xs font-semibold text-app-text lg:flex">
-            <Network size={15} className="text-app-gold" />
-            Binance Smart Chain
-          </div>
+          {isHome ? (
+            <nav className="hidden items-center gap-7 text-sm font-semibold lg:flex">
+              {navigation.slice(0, 6).map((item) => (
+                <NavLink
+                  key={item.path}
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `relative transition ${isActive ? "text-app-gold" : "text-white/70 hover:text-white"}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
+          ) : (
+            <div className="hidden items-center gap-2 rounded-lg border border-app-line bg-app-panel px-3 py-2 text-xs font-semibold text-app-text lg:flex">
+              <Network size={15} className="text-app-gold" />
+              Binance Smart Chain
+            </div>
+          )}
 
           <div className="flex items-center gap-2">
             <LanguageBubble />
@@ -192,19 +210,21 @@ export default function AppShell({ children }) {
         </div>
       </header>
 
-      <aside className="app-sidebar fixed bottom-0 left-0 top-16 z-30 hidden w-64 border-r border-app-line px-3 py-4 backdrop-blur-xl md:block">
-        <nav className="grid gap-2">
-          {navigation.map((item) => (
-            <NavItem key={item.path} item={item} />
-          ))}
-        </nav>
-        <div className="status-rail absolute bottom-4 left-3 right-3 rounded-lg border border-app-gold/15 p-3">
-          <p className="text-xs font-bold text-app-gold">链上安全</p>
-          <p className="mt-2 text-xs leading-5 text-app-text">
-            钱包签名、资金操作、关系绑定均由用户授权执行，前端不保存私钥。
-          </p>
-        </div>
-      </aside>
+      {!isHome ? (
+        <aside className="app-sidebar fixed bottom-0 left-0 top-16 z-30 hidden w-64 border-r border-app-line px-3 py-4 backdrop-blur-xl md:block">
+          <nav className="grid gap-2">
+            {navigation.map((item) => (
+              <NavItem key={item.path} item={item} />
+            ))}
+          </nav>
+          <div className="status-rail absolute bottom-4 left-3 right-3 rounded-lg border border-app-gold/15 p-3">
+            <p className="text-xs font-bold text-app-gold">链上安全</p>
+            <p className="mt-2 text-xs leading-5 text-app-text">
+              钱包签名、资金操作、关系绑定均由用户授权执行，前端不保存私钥。
+            </p>
+          </div>
+        </aside>
+      ) : null}
 
       {menuOpen ? (
         <div className="fixed inset-0 z-50 bg-black/72 backdrop-blur-sm md:hidden">
@@ -229,7 +249,7 @@ export default function AppShell({ children }) {
         </div>
       ) : null}
 
-      <main className="content-stage relative mx-auto min-h-screen w-full max-w-7xl px-4 pb-12 pt-20 md:pl-72 md:pr-6">
+      <main className={`content-stage relative min-h-screen w-full ${isHome ? "home-stage pt-16" : "mx-auto max-w-7xl px-4 pb-12 pt-20 md:pl-72 md:pr-6"}`}>
         {children}
       </main>
     </div>

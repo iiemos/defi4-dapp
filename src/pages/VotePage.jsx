@@ -12,14 +12,16 @@ export default function VotePage() {
         kicker="OPT Vote"
         title="投票治理"
         copy="每投一票消耗 1 个 OPT，投票完成后展示结果和进度，可按时间或 OPT 消耗数量推进。"
-        action={<ActionButton onClick={() => openDialog("wallet")}>连接后投票</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("wallet")}><Vote size={18} />连接后投票</ActionButton>}
       />
 
       <section className="grid gap-4 lg:grid-cols-3">
         {voteOptions.map((option) => (
-          <Card key={option.name} className="transition hover:border-app-gold/30">
+          <Card key={option.name} className="module-feature-card transition hover:border-app-gold/30">
             <div className="flex items-center justify-between">
-              <Vote size={22} className="text-app-gold" />
+              <span className="gold-icon-box">
+                <Vote size={22} />
+              </span>
               <span className="inline-flex items-center gap-1 rounded-md border border-app-gold/25 bg-app-gold/10 px-2 py-1 text-xs font-black text-app-gold">
                 <CircleDollarSign size={13} />
                 {option.cost}
@@ -40,7 +42,7 @@ export default function VotePage() {
         <Card>
           <div className="grid gap-3 md:grid-cols-3">
             {["钱包签名确认 OPT 消耗", "结束后显示投票结果", "进度支持时间或消耗量规则"].map((item) => (
-              <div key={item} className="rounded-lg border border-app-line bg-black p-4 text-sm font-semibold text-app-text">
+              <div key={item} className="metric-tile text-sm font-semibold text-app-text">
                 {item}
               </div>
             ))}

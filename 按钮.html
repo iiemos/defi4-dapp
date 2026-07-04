@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>金色渐变按钮 · 8px圆角</title>
+    <style>
+        /* ===== 全局重置 & 背景 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            padding: 20px;
+        }
+
+        /* ===== 卡片容器 ===== */
+        .container {
+            max-width: 640px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 48px 40px 56px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.06);
+            transition: box-shadow 0.4s;
+        }
+
+        .container:hover {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 215, 0, 0.10);
+        }
+
+        /* ===== 标题 ===== */
+        .title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 6px;
+            color: rgba(255, 215, 0, 0.35);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: rgba(255, 215, 0, 0.15);
+            margin-bottom: 40px;
+            user-select: none;
+        }
+
+        /* ===== 按钮网格 ===== */
+        .button-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px 24px;
+            width: 100%;
+        }
+
+        /* ===== 基础按钮 — 圆角统一 8px ===== */
+        .btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #1a1400;
+            border: none;
+            border-radius: 8px;                     /* 统一 8px */
+            cursor: pointer;
+            outline: none;
+            background: linear-gradient(145deg, #d4af37, #f9e68c, #c9a22a, #f5e07a);
+            background-size: 200% 200%;
+            box-shadow:
+                0 4px 20px rgba(212, 175, 55, 0.25),
+                inset 0 1px 0 rgba(255, 255, 200, 0.6),
+                inset 0 -2px 0 rgba(120, 80, 20, 0.3);
+            transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            text-decoration: none;
+            min-width: 140px;
+            user-select: none;
+            will-change: transform, box-shadow, background-position;
+        }
+
+        /* 金色渐变核心 — 流动感 */
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;                     /* 与按钮一致 */
+            padding: 2px;
+            background: linear-gradient(135deg, #f9e68c, #d4af37, #f9e68c, #b8860b);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            transition: background-position 0.6s;
+        }
+
+        .btn:hover::before {
+            background-position: 50% 100%;
+        }
+
+
+        .btn:hover::after {
+            opacity: 1;
+        }
+
+        /* ===== 悬停 & 激活 — 光晕已减弱 ===== */
+        .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background-position: 100% 100%;
+            box-shadow:
+                0 8px 28px rgba(212, 175, 55, 0.30),
+                0 0 15px rgba(212, 175, 55, 0.06),
+                inset 0 1px 0 rgba(255, 255, 200, 0.7),
+                inset 0 -2px 0 rgba(120, 80, 20, 0.2);
+            color: #0f0b00;
+        }
+
+        .btn:active {
+            transform: translateY(1px) scale(0.97);
+            box-shadow:
+                0 4px 15px rgba(212, 175, 55, 0.3),
+                inset 0 2px 4px rgba(0, 0, 0, 0.2);
+            transition-duration: 0.08s;
+        }
+
+        /* ===== 不同尺寸 ===== */
+        .btn-sm {
+            padding: 12px 28px;
+            font-size: 13px;
+            min-width: 100px;
+        }
+
+        .btn-lg {
+            padding: 20px 56px;
+            font-size: 20px;
+            min-width: 180px;
+            letter-spacing: 2px;
+        }
+
+        .btn-xl {
+            padding: 24px 72px;
+            font-size: 24px;
+            min-width: 220px;
+            letter-spacing: 3px;
+            border-radius: 8px;                     /* 统一 8px */
+        }
+
+        /* ===== 变体：纯金 / 亮金 / 古铜金 ===== */
+        .btn-gold-light {
+            background: linear-gradient(145deg, #f5e07a, #fcf3b0, #eac94a, #f9e68c);
+            box-shadow:
+                0 4px 20px rgba(245, 224, 122, 0.3),
+                inset 0 1px 0 rgba(255, 255, 230, 0.8),
+                inset 0 -2px 0 rgba(160, 120, 30, 0.25);
+        }
+
+        .btn-gold-dark {
+            background: linear-gradient(145deg, #b8860b, #d4af37, #a67c00, #c9a22a);
+            box-shadow:
+                0 4px 20px rgba(184, 134, 11, 0.35),
+                inset 0 1px 0 rgba(255, 215, 0, 0.4),
+                inset 0 -2px 0 rgba(80, 50, 0, 0.4);
+            color: #f5e6b0;
+        }
+
+        .btn-gold-dark:hover {
+            color: #fff8e0;
+            box-shadow:
+                0 8px 28px rgba(184, 134, 11, 0.30),
+                0 0 15px rgba(184, 134, 11, 0.06),
+                inset 0 1px 0 rgba(255, 215, 0, 0.5);
+        }
+
+        .btn-gold-rose {
+            background: linear-gradient(145deg, #c9a26a, #e8cfa0, #b8894a, #dbb580);
+            box-shadow:
+                0 4px 20px rgba(201, 162, 106, 0.3),
+                inset 0 1px 0 rgba(255, 235, 200, 0.6),
+                inset 0 -2px 0 rgba(120, 80, 40, 0.25);
+            color: #2d1f0a;
+        }
+
+        .btn-gold-rose:hover {
+            box-shadow:
+                0 8px 28px rgba(201, 162, 106, 0.30),
+                0 0 15px rgba(201, 162, 106, 0.06);
+        }
+
+        /* ===== 带图标 ===== */
+        .btn-icon {
+            gap: 10px;
+        }
+
+        .btn-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .btn-icon:hover svg {
+            transform: rotate(8deg) scale(1.08);
+        }
+
+        /* ===== 禁用状态 ===== */
+        .btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none !important;
+            filter: grayscale(0.2);
+            box-shadow: 0 2px 12px rgba(212, 175, 55, 0.08) !important;
+        }
+
+        .btn:disabled::after {
+            opacity: 0 !important;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 520px) {
+            .container {
+                padding: 32px 20px 40px;
+                border-radius: 32px;
+            }
+
+            .title {
+                font-size: 22px;
+                letter-spacing: 4px;
+            }
+
+            .btn {
+                padding: 14px 28px;
+                font-size: 14px;
+                min-width: 110px;
+            }
+
+            .btn-lg {
+                padding: 16px 40px;
+                font-size: 17px;
+                min-width: 140px;
+            }
+
+            .btn-xl {
+                padding: 18px 48px;
+                font-size: 19px;
+                min-width: 160px;
+                border-radius: 8px;                 /* 统一 8px */
+            }
+
+            .btn-sm {
+                padding: 10px 20px;
+                font-size: 12px;
+                min-width: 80px;
+            }
+
+            .button-row {
+                gap: 14px 16px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .btn {
+                padding: 12px 20px;
+                font-size: 12px;
+                min-width: 80px;
+            }
+
+            .btn-lg {
+                padding: 14px 28px;
+                font-size: 14px;
+                min-width: 110px;
+            }
+
+            .btn-xl {
+                padding: 16px 32px;
+                font-size: 16px;
+                min-width: 130px;
+            }
+
+            .container {
+                padding: 24px 12px 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 标题 -->
+        <div class="title">✦ 金 色 渐 变 ✦</div>
+        <div class="subtitle">— 8px 圆角 · 精致硬朗 —</div>
+
+        <div class="button-grid">
+            <!-- 第一行：基础尺寸 -->
+            <div class="button-row">
+                <button class="btn">默认金</button>
+                <button class="btn btn-gold-light">亮金色</button>
+                <button class="btn btn-gold-dark">古铜金</button>
+            </div>
+
+            <!-- 第二行：不同尺寸 -->
+            <div class="button-row">
+                <button class="btn btn-sm">小号</button>
+                <button class="btn btn-lg">大号</button>
+                <button class="btn btn-xl">特大</button>
+            </div>
+
+            <!-- 第三行：带图标 + 玫瑰金 -->
+            <div class="button-row">
+                <button class="btn btn-icon btn-gold-rose">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+                    玫瑰金
+                </button>
+                <button class="btn btn-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    定位
+                </button>
+                <button class="btn btn-icon btn-gold-dark">
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    收藏
+                </button>
+            </div>
+
+            <!-- 第四行：禁用状态演示 -->
+            <div class="button-row">
+                <button class="btn" disabled>暂不可用</button>
+                <button class="btn btn-gold-light" disabled>已禁用</button>
+            </div>
+
+            <!-- 第五行：链接及展示按钮 -->
+            <div class="button-row" style="margin-top:4px;">
+                <a href="#" class="btn" style="text-decoration:none;">链接按钮</a>
+                <button class="btn btn-gold-rose" style="cursor:default;">仅展示</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

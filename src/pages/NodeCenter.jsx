@@ -12,11 +12,11 @@ export default function NodeCenter() {
         kicker="Global Node"
         title="全球节点"
         copy="节点总量 2000 个，每个节点 500U；前台展示购买入口、阶段权益、释放规则与身份标识。"
-        action={<ActionButton onClick={() => openDialog("node")}>购买节点</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("node")}><Crown size={18} />购买节点</ActionButton>}
       />
 
       <section className="grid gap-4 lg:grid-cols-[1fr_1fr]">
-        <Card>
+        <Card className="module-feature-card">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-xs font-black uppercase tracking-[0.22em] text-app-gold">Node Pass</p>
@@ -25,18 +25,20 @@ export default function NodeCenter() {
                 独立节点购买链接，隐藏具体剩余数量，仅展示当前权益与阶段信息。
               </p>
             </div>
-            <Crown size={42} className="text-app-gold" />
+            <span className="gold-icon-box h-14 w-14">
+              <Crown size={30} />
+            </span>
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
             {["HPS 空投 2.4%", "首期释放 10%", "6 个月线性释放"].map((item) => (
-              <div key={item} className="rounded-lg border border-app-line bg-black p-3 text-sm font-bold text-app-text">
+              <div key={item} className="metric-tile text-sm font-bold text-app-text">
                 {item}
               </div>
             ))}
           </div>
         </Card>
 
-        <Card>
+        <Card className="module-feature-card">
           <SectionTitle title="节点考核" />
           <div className="grid gap-3">
             {[
@@ -45,7 +47,9 @@ export default function NodeCenter() {
               { icon: Gem, text: "底池未达到 1000万U 前不考核。" },
             ].map((item) => (
               <div key={item.text} className="flex items-center gap-3 rounded-lg border border-app-line bg-black p-3 text-sm text-app-text">
-                <item.icon className="text-app-gold" size={18} />
+                <span className="gold-icon-box h-9 w-9 shrink-0">
+                  <item.icon size={18} />
+                </span>
                 {item.text}
               </div>
             ))}

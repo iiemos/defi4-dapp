@@ -12,11 +12,11 @@ export default function Support() {
         kicker="Notice / Support"
         title="公告与客服"
         copy="前台常驻官方客服入口、社群链接和问题反馈表单，重要公告可强提醒。"
-        action={<ActionButton onClick={() => openDialog("support")}>提交反馈</ActionButton>}
+        action={<ActionButton onClick={() => openDialog("support")}><Headphones size={18} />提交反馈</ActionButton>}
       />
 
       <section className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
-        <Card>
+        <Card className="module-feature-card">
           <SectionTitle title="系统通告" />
           <div className="grid gap-3">
             {announcements.map((item) => (
@@ -31,7 +31,7 @@ export default function Support() {
           </div>
         </Card>
 
-        <Card>
+        <Card className="module-feature-card">
           <SectionTitle title="客服联络" />
           <div className="grid gap-3">
             {[
@@ -41,7 +41,9 @@ export default function Support() {
             ].map((item) => (
               <button key={item.label} type="button" className="flex items-center justify-between rounded-lg border border-app-line bg-black p-3 text-left transition hover:border-app-gold/30" onClick={() => openDialog("support")}>
                 <span className="flex items-center gap-3">
-                  <item.icon size={19} className="text-app-gold" />
+                  <span className="gold-icon-box h-9 w-9 shrink-0">
+                    <item.icon size={19} />
+                  </span>
                   <span>
                     <span className="block text-sm font-bold">{item.label}</span>
                     <span className="block text-xs text-app-muted">{item.value}</span>
