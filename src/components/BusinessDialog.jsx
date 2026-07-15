@@ -55,7 +55,7 @@ function DialogContent({ config, closeDialog }) {
         </div>
 
         <div className="mt-5 grid gap-3 sm:grid-cols-2">
-          <ActionButton onClick={closeDialog}>{config.primaryLabel}</ActionButton>
+          <ActionButton className="home-gold-button--compact" onClick={closeDialog}>{config.primaryLabel}</ActionButton>
           <ActionButton variant="secondary" onClick={closeDialog}>{config.secondaryLabel}</ActionButton>
         </div>
       </section>
